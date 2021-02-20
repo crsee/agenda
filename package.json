@@ -12,8 +12,12 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "concurrently": "^5.3.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mongoosastic": "^4.6.0",
     "mongoose": "^5.11.17",
+    "nodemon": "^2.0.6",
+    "passport": "^0.4.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
@@ -44,5 +48,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

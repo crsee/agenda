@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-import Calendar from '../Calendar/calendar'
-//import './EventForm.css';
+import Calendar from '../Calendar/Calendar'
+import './EventForm.css';
 //import './EventFormBulma.sass';
 import EventForm from "./EventForm";
 

@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 //footer here;
 
@@ -10,7 +11,11 @@ const Landing = () => {
                 <p>
                     WELCOME TO MY APP
                 </p>
+                <p>
+                    <Link to ="/createEvent"> Create New Event</Link>
+                </p>
             </header>
+
         </div>
     );
 }
