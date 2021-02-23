@@ -28,7 +28,7 @@ function handleSubmit(e){
             console.log(error);
             console.log("Server Error");
         });
-    //window.location.reload(false)
+    window.location.reload(false)
 }
 
 function EventForm(){

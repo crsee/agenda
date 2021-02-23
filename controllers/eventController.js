@@ -81,7 +81,7 @@ module.exports.editEvent = (req, res) => {
     Event.updateOne({_id: req.body.eventID},
         {
             $set: {
-                host_name: req.body.host_name,
+                name: req.body.name,
                 description: req.body.description,
                 start_date_time: req.body.start_date_time,
                 end_date_time: req.body.end_date_time

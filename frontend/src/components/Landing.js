@@ -12,7 +12,9 @@ const Landing = () => {
                     WELCOME TO MY APP
                 </p>
                 <p>
-                    <Link to ="/createEvent"> Create New Event</Link>
+                    <Link to ="/createEvent"> Create New Event </Link>
+                    <br></br>
+                    <Link to ="/eventList"> Show all events </Link>
                 </p>
             </header>
 

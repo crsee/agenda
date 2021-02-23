@@ -10,28 +10,30 @@ import interactionPlugin, {EventLeaveArg} from "@fullcalendar/interaction";
 
 function formatEventData(eventList){
 
+    // const list = [];
+    // console.log("hi",eventList);
+    // if(eventList != undefined){
+    //     eventList.forEach(function(entry){
+    //         console.log("entry",entry);
+    //         list.push({title: entry.name, "start":entry.start_date_time, "end":entry.end_date_time})
+    //     });
+    // }
+    // //data.dataBaseEventsFormatted = list
+    // console.log("formatted",list);
+    // return list;
+
     const list = [];
     console.log("hi",eventList);
-    if(eventList != undefined){
-        eventList.forEach(function(entry){
-            console.log("entry",entry);
-            list.push({title: entry.name, "start":entry.start_date_time, "end":entry.end_date_time})
+    if(eventList != undefined) {
+        eventList.forEach(function (entry) {
+            console.log("entry", entry);
+            list.push({title: entry.name, "start": entry.start_date_time, "end": entry.end_date_time})
         });
     }
     //data.dataBaseEventsFormatted = list
     console.log("formatted",list);
     return list;
-    /*
-    const list = [];
-    console.log("hi",eventList);
-    eventList.forEach(function(entry){
-        console.log("entry",entry);
-        //list.push({title: entry.name, "start":entry.start_date_time, "end":entry.end_date_time})
-    });
-    //data.dataBaseEventsFormatted = list
-    console.log("formatted",list);
-    return list;
-     */
+
 }
 
 
