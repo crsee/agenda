@@ -1,18 +1,22 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
+import {useAuth0} from "@auth0/auth0-react";
 
 function handleSubmit(e){
+
     e.preventDefault();
     var name  = e.target[0].value;
     var description= e.target[1].value;
     var start_date_time= e.target[2].value;
     var end_date_time= e.target[3].value;
+    var host = e.target[4].value;
 
     var event = {
         name: name,
         description: description,
         start_date_time: start_date_time,
         end_date_time: end_date_time,
+        host:host
     }
     console.log("event", event)
 
@@ -32,6 +36,9 @@ function handleSubmit(e){
 }
 
 function EventForm(){
+
+
+    const {user} = useAuth0();
     return(
         <form onSubmit={handleSubmit}>
             <h1 className="eventFormh1">Event Info</h1>
@@ -68,6 +75,15 @@ function EventForm(){
                 <input type="datetime-local"
                        className="input"
                        name="end_date"
+                       required
+                />
+            </div>
+            <br></br>
+            <div className="control">
+                <input type="text"
+                       name="name"
+                       className="input"
+                       value = {user.email}
                        required
                 />
             </div>

@@ -17,6 +17,7 @@ function SingleEvent(props){
         description: '',
         start_date_time: '',
         end_date_time: '',
+        host:'',
         editState: false
     });
 
@@ -33,7 +34,8 @@ function SingleEvent(props){
                         name: eventData.name,
                         description: eventData.description,
                         start_date_time: eventData.start_date_time,
-                        end_date_time: eventData.end_date_time
+                        end_date_time: eventData.end_date_time,
+                        host: eventData.host
                     });
                 }
                 // console.log('this the data',res.data);
@@ -128,7 +130,8 @@ function SingleEvent(props){
             <button onClick={deleteEvent}>DELETE</button>
             <br/><h2>Event Info</h2>
             <p>
-                <strong>Name</strong>: {data.name}
+                <strong>Host</strong>: {data.host} <br/>
+                <strong>Name</strong>: {data.name} <br/>
                 <strong>Event Description</strong>: {data.description} <br/>
                 <strong>Start Time</strong>: {convertTime(data.start_date_time)} <br/>
                 <strong>End Time</strong>: {convertTime(data.end_date_time)}<br/>

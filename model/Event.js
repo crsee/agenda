@@ -6,8 +6,11 @@ const EventSchema = new Schema({
     //name: {type: String, es_indexed: true},
     name: String,
     description: String,
+    host: String,
+    members: Array,
     start_date_time: Date,
     end_date_time: Date
+
 });
 //
 // EventSchema.plugin(mongoosastic, {

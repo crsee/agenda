@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import "./ListEvents.css"
 //import './ListEvents.css';
 import axios from "axios";
 
@@ -32,7 +33,7 @@ const SingleEventForList = props => (
                         </p>
                         <button className="button is-info is-light" id= "goToEventButton" onClick={goToEvent}>
                             <Link to= {{
-                                pathname:`/SingleEvent/${event._id}`,
+                                pathname:`/singleEvent/${event._id}`,
                                 state:{eventName: event.name,
                                     eventDes: event.description,
                                     eventS_datetime: event.start_date,

@@ -6,15 +6,18 @@ import Landing from "./components/Landing"
 import CreateEvent from "./components/CreateEvent/CreateEvent"
 import EventList from "./components/EventList/EventList"
 import SingleEvent from "./components/Event/SingleEventPage"
-
+import Profile from "./components/Profile/ProfilePage"
+import Navbar from "./components/Navbar/Navbar"
 
 function App() {
   return (
     <div className="app">
+        <Navbar/>
       <Route exact path = "/" component={Landing}/>
       <Route exact path = "/createEvent" component = {CreateEvent}/>
       <Route exact path = "/eventList" component = {EventList}/>
-      <Route exact path = "/SingleEvent/:id" component={SingleEvent}/>
+      <Route exact path = "/singleEvent/:id" component={SingleEvent}/>
+      <Route exact path = "/profile" component={Profile}/>
     </div>
   );
 }

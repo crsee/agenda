@@ -16,6 +16,7 @@ function ListAllEvents(){
         start_time:'',
         end_date:'',
         end_time:'',
+        host:''
     });
 
 
@@ -107,32 +108,41 @@ function ListAllEvents(){
     }
 
 
+    if(
+        data.dataBaseEvents.length > 0){
+        return(
+            <div className="first">
+                <div className="second">
+                    <p>IN THE LIST EVENT COMPONENT</p>
+                </div>
 
+                <p>Sort By:
+                    <select onChange={sortHelper}>
+                        <option value="Default"></option>
+                        <option value="NameA">Name (A-Z)</option>
+                        <option value="NameZ">Name (Z-A)</option>
+                        <option value="DateS">Date (Soon-Later)</option>
+                        <option value="DateL">Date (Later-Soon)</option>
+                    </select>
+                </p>
 
-    return(
-        <div className="first">
-            <div className="second">
-                <p>IN THE LIST EVENT COMPONENT</p>
+                <div className="second">
+                    <SingleEventForList eventsProp={data.dataBaseEvents}/>
+                </div>
             </div>
 
-            <p>Sort By:
-                <select onChange={sortHelper}>
-                    <option value="Default"></option>
-                    <option value="NameA">Name (A-Z)</option>
-                    <option value="NameZ">Name (Z-A)</option>
-                    <option value="DateS">Date (Soon-Later)</option>
-                    <option value="DateL">Date (Later-Soon)</option>
-                </select>
-            </p>
 
-            <div className="second">
-                <SingleEventForList eventsProp={data.dataBaseEvents}/>
-            </div>
-        </div>
+
+        )}
+    else{
+        return(
+            <p>no events to list</p>
+        )
+    }
 
 
 
-    )
+
 
 
 }
