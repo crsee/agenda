@@ -37,9 +37,16 @@ function handleSubmit(e){
 
 function EventForm(){
 
-
-    const {user} = useAuth0();
-    return(
+    const {user,isAuthenticated} = useAuth0();
+    console.log("EMAIL",user);
+    if(user === undefined){
+        return(
+            <div>
+                loading
+            </div>
+        )
+    }
+    return (
         <form onSubmit={handleSubmit}>
             <h1 className="eventFormh1">Event Info</h1>
             <label className = "label" htmlFor='event_name'>Name of Event:*</label>
@@ -80,7 +87,7 @@ function EventForm(){
             </div>
             <br></br>
             <div className="control">
-                <input type="text"
+                <input type="hidden"
                        name="name"
                        className="input"
                        value = {user.email}

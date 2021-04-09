@@ -38,10 +38,31 @@ function formatEventData(eventList){
 
 
 
-function Calendar(props){
+function Calendar(){
+
+    const [data, setData] = useState({
+        dataBaseEvents:[]
+    });
+
+    useEffect(()=> {
+        console.log('okay');
+        fetch('/getAllEvents')
+            .then(response => response.json())
+            .then(data => {
+                console.log("Get response: ", data);
+                const dataBaseEvents = data
+                setData({dataBaseEvents : dataBaseEvents});
+                console.log("Calendar data has been populated")
+                console.log("events",dataBaseEvents);
+            })
+            .catch(error => console.error(error));
+
+    }, []);
+
+
     const history = useHistory();
-    console.log("the props",props.calendarProp);
-    var data = formatEventData(props.calendarProp.eventsData);
+    console.log("the props",data.dataBaseEvents);
+    var formatted_data = formatEventData(data.dataBaseEvents.eventsData);
 
     return(
         <FullCalendar plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -59,7 +80,7 @@ function Calendar(props){
             //eventColor='#378006'
                       timeZone="local"
                       eventTextColor='#fff'
-                      events={data}
+                      events={formatted_data}
                       eventClick={
                           function(arg){
                               console.log(arg.event._def.extendedProps.event_id)
