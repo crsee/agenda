@@ -101,3 +101,20 @@ module.exports.editEvent = (req, res) => {
                 });
         })
 }
+
+module.exports.getEventByUser =(req, res) => {
+    Event.find({host : req.params.host}, (err, eventsData) => {
+        if(err)
+            res.status(500).json({ message : {
+                    msgBody : "Error has occurred", msgError : true },
+                eventsData : null
+            });
+        else
+            console.log("hi",eventsData);
+        console.log("bye",req.params);
+        res.status(200).json({ message : {
+                msgBody : "Successfully retrieved event", msgError : false },
+            eventsData
+        });
+    });
+}

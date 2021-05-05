@@ -5,6 +5,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin, {EventLeaveArg} from "@fullcalendar/interaction";
 import {useHistory} from "react-router-dom";
+import {useAuth0} from "@auth0/auth0-react";
 
 
 
@@ -39,25 +40,31 @@ function formatEventData(eventList){
 
 
 function Calendar(){
-
+    const {user, isAuthenticated, } = useAuth0();
     const [data, setData] = useState({
         dataBaseEvents:[]
     });
 
     useEffect(()=> {
-        console.log('okay');
-        fetch('/getAllEvents')
-            .then(response => response.json())
-            .then(data => {
-                console.log("Get response: ", data);
-                const dataBaseEvents = data
-                setData({dataBaseEvents : dataBaseEvents});
-                console.log("Calendar data has been populated")
-                console.log("events",dataBaseEvents);
-            })
-            .catch(error => console.error(error));
+        // const doSomething = async () => {
+        //     console.log(isAuthenticated);
+        // }
+        if(isAuthenticated){
+            //doSomething().then(r => console.log("loading complete"));
+            console.log('okay', user);
+            fetch('/getEventByUser/'+user.email)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Get response: ", data);
+                    const dataBaseEvents = data
+                    setData({dataBaseEvents : dataBaseEvents});
+                    console.log("Calendar data has been populated")
+                    console.log("events",dataBaseEvents);
+                })
+                .catch(error => console.error(error));
+        }
 
-    }, []);
+    }, [isAuthenticated]);
 
 
     const history = useHistory();

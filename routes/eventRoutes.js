@@ -29,6 +29,8 @@ const router = Router();
 
 router.get('/getSingleEvent/:id', eventController.getSingleEvent);
 
+router.get( '/getEventByUser/:host', eventController.getEventByUser)
+
 router.get('/getAllEvents', eventController.getAllEvents);
 
 router.post('/saveEvent', eventController.saveEvent);

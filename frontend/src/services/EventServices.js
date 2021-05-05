@@ -90,5 +90,25 @@ export default {
                 else
                     return { message : { msgBody : "Not Authenticated", msgError : true}};
             });
+    },
+
+    getEventByUser : userID => {
+        return fetch('http://localhost:5000/getEventByUser/' + userID, {
+            credentials : 'include',
+        })
+            .then(res => {
+                if(res.status !== 401) {
+                    if (res.status === 500)
+                        return res.json().then(({ message }) => {
+                            return { message, data : null};
+                        });
+                    else
+                        return res.json().then(({ message, eventData }) => {
+                            return { message, eventData};
+                        });
+                }
+                else
+                    return { message : { msgBody : "Not Authenticated", msgError : true}, data : null};
+            });
     }
 }

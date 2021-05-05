@@ -8,6 +8,7 @@ import EventList from "./components/EventList/EventList"
 import SingleEvent from "./components/Event/SingleEventPage"
 import Profile from "./components/Profile/ProfilePage"
 import Navbar from "./components/Navbar/Navbar"
+import Calendar from "./components/Calendar/Calendar";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route exact path = "/eventList" component = {EventList}/>
       <Route exact path = "/singleEvent/:id" component={SingleEvent}/>
       <Route exact path = "/profile" component={Profile}/>
+      <Route exact path = "/calendar" component={Calendar}/>
     </div>
   );
 }
