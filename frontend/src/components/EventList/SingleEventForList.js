@@ -19,7 +19,6 @@ function convertTime(date){
 const SingleEventForList = props => (
     <div>
         { props.eventsProp.map((event) => {
-            console.log("pewpew",props);
 
             return (
                 <div key ={event._id} id= "containerForEvent" className="container">

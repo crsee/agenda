@@ -3,10 +3,11 @@ import axios from "axios";
 import SingleEventForList from "./SingleEventForList";
 import SearchBar from "../SearchBar/SearchBar";
 import EventServices from '../../services/EventServices';
+import {useAuth0} from "@auth0/auth0-react";
 //import Footer from '../Footer'
 
 function ListAllEvents(){
-
+    const {user,isAuthenticated} = useAuth0();
     const [data, setData] = useState({
         dataBaseEvents:[],
         //dataBaseEventsFormatted:[],
@@ -21,28 +22,28 @@ function ListAllEvents(){
 
 
     useEffect(()=> {
-        EventServices.getAllEvents()
-            .then(({ message, eventsData }) => {
-                if(message.msgError)
-                    console.log(message.msgBody);
-                else {
-                    const dataBaseEvents = eventsData;
+        if(isAuthenticated){
+            console.log("user email",user.email);
+            // EventServices.getEventByUser(user.email)
+            //     .then(({ message, eventsData }) => {
+            //         if(message.msgError)
+            //             console.log(message.msgBody);
+            //         else {
+            //             const dataBaseEvents = eventsData;
+            //             setData({dataBaseEvents : dataBaseEvents});
+            //         }
+            //     });
+            fetch('/getEventByUser/'+user.email)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Get response: ", data);
+                    const dataBaseEvents = data
                     setData({dataBaseEvents : dataBaseEvents});
-                }
-            });
-        // fetch('/getAllEvents')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log("Get response: ", data);
-        //         const dataBaseEvents = data.eventsData
-        //         setData({dataBaseEvents : dataBaseEvents});
-        //         //console.log("Calendar data has been populated")
-        //         console.log("events2",dataBaseEvents);
-        //         //const formatted = formatEventData(dataBaseEvents);
-        //         //setData({dataBaseEventsFormatted : formatted});
-        //     })
-        //     .catch(error => console.error(error));
-    }, []);
+                    console.log("events for this host",dataBaseEvents);
+                })
+                .catch(error => console.error(error));
+        }
+    }, [isAuthenticated]);
 
     function sortHelper(event){
         if(event.target.value === "NameA"){
@@ -108,8 +109,16 @@ function ListAllEvents(){
     }
 
 
-    if(
-        data.dataBaseEvents.length > 0){
+    console.log("EMAIL",user);
+    if(data.dataBaseEvents.eventsData === undefined){
+        return(
+            <div>
+                loading...
+            </div>
+        )
+    }
+    else if(
+        data.dataBaseEvents.eventsData.length > 0){
         return(
             <div className="first">
                 <div className="second">
@@ -130,7 +139,7 @@ function ListAllEvents(){
 
 
                 <div className="second">
-                    <SingleEventForList eventsProp={data.dataBaseEvents}/>
+                    <SingleEventForList eventsProp={data.dataBaseEvents.eventsData}/>
                 </div>
             </div>
 
