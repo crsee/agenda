@@ -4,6 +4,7 @@ import JSONPretty from "react-json-pretty";
 import {Link} from "react-router-dom";
 import LogoutButton from "../Login/LogoutButton";
 import LoginButton from "../Login/LoginButton";
+import SearchBar from "../SearchBar/SearchBar";
 import "./Navbar.css";
 
 const Navbar = () =>{

@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import SingleEventForList from "./SingleEventForList";
-
+import SearchBar from "../SearchBar/SearchBar";
 import EventServices from '../../services/EventServices';
 //import Footer from '../Footer'
 
@@ -113,18 +113,21 @@ function ListAllEvents(){
         return(
             <div className="first">
                 <div className="second">
-                    <p>IN THE LIST EVENT COMPONENT</p>
+                    <div className= "searchBar">
+                        <SearchBar/>
+                    </div>
+
+                    <p>Sort By:
+                        <select onChange={sortHelper}>
+                            <option value="Default"></option>
+                            <option value="NameA">Name (A-Z)</option>
+                            <option value="NameZ">Name (Z-A)</option>
+                            <option value="DateS">Date (Soon-Later)</option>
+                            <option value="DateL">Date (Later-Soon)</option>
+                        </select>
+                    </p>
                 </div>
 
-                <p>Sort By:
-                    <select onChange={sortHelper}>
-                        <option value="Default"></option>
-                        <option value="NameA">Name (A-Z)</option>
-                        <option value="NameZ">Name (Z-A)</option>
-                        <option value="DateS">Date (Soon-Later)</option>
-                        <option value="DateL">Date (Later-Soon)</option>
-                    </select>
-                </p>
 
                 <div className="second">
                     <SingleEventForList eventsProp={data.dataBaseEvents}/>

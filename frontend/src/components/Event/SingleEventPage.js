@@ -5,6 +5,7 @@ import React, {useEffect, useState, useContext } from "react";
 import axios from "axios";
 import EventEditForm from './EventEditForm'
 import EventServices from '../../services/EventServices';
+import "./SingleEventPage.css";
 
 function SingleEvent(props){
 
@@ -124,7 +125,7 @@ function SingleEvent(props){
     }
 
     return(
-        <div>
+        <div className = "SingleEvent">
             <h1 className="title is-1">Single Event Comp for: {data.name}</h1>
             <button onClick={toggleEditOn}>EDIT</button>
             <button onClick={deleteEvent}>DELETE</button>

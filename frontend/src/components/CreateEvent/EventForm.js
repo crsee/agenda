@@ -47,7 +47,7 @@ function EventForm(){
         )
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="event_form">
             <h1 className="eventFormh1">Event Info</h1>
             <label className = "label" htmlFor='event_name'>Name of Event:*</label>
             <div className="control">

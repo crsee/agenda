@@ -24,12 +24,12 @@ const SingleEventForList = props => (
             return (
                 <div key ={event._id} id= "containerForEvent" className="container">
                     <div className="notification is-primary">
-                        <h1>ID: {event._id}</h1>
+                        <h1>{event.name} </h1>
                         <p>
-                            <strong>Event Name</strong>: {event.name}
-                            <strong>Event Description</strong>: {event.description}
-                            <strong>Start Time</strong>: {convertTime(event.start_date_time)}
-                            <strong>End Time</strong>: {convertTime(event.end_date_time)}
+                            <strong>ID</strong>: {event._id},
+                            <strong> Event Description</strong>: {event.description},
+                            <strong> Start Time</strong>: {convertTime(event.start_date_time)},
+                            <strong> End Time</strong>: {convertTime(event.end_date_time)}
                         </p>
                         <button className="button is-info is-light" id= "goToEventButton" onClick={goToEvent}>
                             <Link to= {{
