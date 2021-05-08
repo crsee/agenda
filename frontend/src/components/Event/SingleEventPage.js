@@ -62,7 +62,7 @@ function SingleEvent(props){
             eventID: data.eventID,
             name:data.name,
             description: data.description,
-
+            host: data.host,
             start_date_time: data.start_date_time,
             end_date_time: data.end_date_time,
         })
@@ -73,6 +73,7 @@ function SingleEvent(props){
         setData({editState: false,
             eventID: data.eventID,
             name:data.name,
+            host: data.host,
             description: data.description,
             start_date_time: data.start_date_time,
             end_date_time: data.end_date_time,
@@ -115,43 +116,56 @@ function SingleEvent(props){
     //         });
     //}
 //http://localhost:3000/singleEvent/6074d2d05e259b25c8936657
-    if(user.email !== data.host || !isAuthenticated){
-        return(
-            <div>
-                <h1>Access Denied</h1>
-            </div>
-        )
-    }
-    else{
-        if(data.editState === true){
+    if(isAuthenticated){
+        if(user.email !== data.host || !isAuthenticated){
+            console.log(user.email);
+            console.log(data.name);
+            console.log(data);
             return(
                 <div>
-                    <div>
-                        <EventEditForm props={data}></EventEditForm>
-                        <button onClick={toggleEditOff}>Cancel</button>
-                        {/*<CommentBox eventID={props.match.params.id} user={user}/>*/}
-                    </div>
+                    <h1>Access Denied</h1>
                 </div>
             )
         }
         else{
-            return(
-                <div className = "SingleEvent">
-                    <h1 className="title is-1">Single Event Comp for: {data.name}</h1>
-                    <button onClick={toggleEditOn}>EDIT</button>
-                    <button onClick={deleteEvent}>DELETE</button>
-                    <br/><h2>Event Info</h2>
-                    <p>
-                        <strong>Host</strong>: {data.host} <br/>
-                        <strong>Name</strong>: {data.name} <br/>
-                        <strong>Event Description</strong>: {data.description} <br/>
-                        <strong>Start Time</strong>: {convertTime(data.start_date_time)} <br/>
-                        <strong>End Time</strong>: {convertTime(data.end_date_time)}<br/>
-                    </p>
-                    {/*<CommentBox eventID={props.match.params.id} user={user}/>*/}
-                </div>
-            )
+            if(data.editState === true){
+                return(
+                    <div>
+                        <div>
+                            <EventEditForm props={data}></EventEditForm>
+                            <button onClick={toggleEditOff}>Cancel</button>
+                            {/*<CommentBox eventID={props.match.params.id} user={user}/>*/}
+                        </div>
+                    </div>
+                )
+            }
+            else{
+                return(
+                    <div className = "SingleEvent">
+                        <h1 className="title is-1">Single Event Comp for: {data.name}</h1>
+                        <button onClick={toggleEditOn}>EDIT</button>
+                        <button onClick={deleteEvent}>DELETE</button>
+                        <br/><h2>Event Info</h2>
+                        <p>
+                            <strong>Host</strong>: {data.host} <br/>
+                            <strong>Name</strong>: {data.name} <br/>
+                            <strong>Event Description</strong>: {data.description} <br/>
+                            <strong>Start Time</strong>: {convertTime(data.start_date_time)} <br/>
+                            <strong>End Time</strong>: {convertTime(data.end_date_time)}<br/>
+                        </p>
+                        {/*<CommentBox eventID={props.match.params.id} user={user}/>*/}
+                    </div>
+                )
+            }
         }
+
+    }
+    else{
+        return(
+            <div>
+                loading...
+            </div>
+            )
     }
 
 }

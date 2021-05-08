@@ -9,7 +9,8 @@ import {useAuth0} from "@auth0/auth0-react";
 
 const Landing = () => {
     const {user,isAuthenticated} = useAuth0();
-    console.log(localStorage.getItem("isUserAuthenticated"))
+    console.log(localStorage.getItem("isUserAuthenticated"));
+    console.log(localStorage.getItem("userEmail"));
     if(isAuthenticated){
         return (
             <div className="App">

@@ -5,7 +5,7 @@ const LoginButton = () => {
     const {loginWithRedirect, isAuthenticated} = useAuth0();
 
     function onLogin(){
-        localStorage.setItem("isUserAuthenticated", "yes")
+        localStorage.setItem("isUserAuthenticated", "yes");
         loginWithRedirect().then(r => console.log(r));
     }
 
