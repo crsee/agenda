@@ -6,9 +6,10 @@ import axios from "axios";
 import EventEditForm from './EventEditForm'
 import EventServices from '../../services/EventServices';
 import "./SingleEventPage.css";
+import {useAuth0} from "@auth0/auth0-react";
 
 function SingleEvent(props){
-
+    const {user,isAuthenticated} = useAuth0();
     //const {user} = useContext(AuthContext);
     const [data, setData] = useState({
         dataBaseEvents: [],
@@ -24,25 +25,28 @@ function SingleEvent(props){
 
 
     useEffect(()=> {
-        const eventID = props.match.params.id;
-        EventServices.getSingleEvent(eventID)
-            .then(({ message, eventData}) =>{
-                if(message.msgError)
-                    console.log(message.msgBody);
-                else {
-                    setData({
-                        eventID: eventID,
-                        name: eventData.name,
-                        description: eventData.description,
-                        start_date_time: eventData.start_date_time,
-                        end_date_time: eventData.end_date_time,
-                        host: eventData.host
-                    });
-                }
-                // console.log('this the data',res.data);
-                // console.log("data has been fetched");
-            })
-    }, [props.match.params.id]);
+        if(user !== undefined){
+            const eventID = props.match.params.id;
+            EventServices.getSingleEvent(eventID)
+                .then(({ message, eventData}) =>{
+                    if(message.msgError)
+                        console.log(message.msgBody);
+                    else {
+                        setData({
+                            eventID: eventID,
+                            name: eventData.name,
+                            description: eventData.description,
+                            start_date_time: eventData.start_date_time,
+                            end_date_time: eventData.end_date_time,
+                            host: eventData.host
+                        });
+                    }
+                    // console.log('this the data',res.data);
+                    // console.log("data has been fetched");
+                })
+        }
+
+    }, [props.match.params.id,user]);
 
 
     function convertTime(date){
@@ -110,36 +114,46 @@ function SingleEvent(props){
     //             //window.location.replace('/eventList')
     //         });
     //}
-
-
-    if(data.editState === true){
+//http://localhost:3000/singleEvent/6074d2d05e259b25c8936657
+    if(user.email !== data.host || !isAuthenticated){
         return(
             <div>
-                <div>
-                    <EventEditForm props={data}></EventEditForm>
-                    <button onClick={toggleEditOff}>Cancel</button>
-                    {/*<CommentBox eventID={props.match.params.id} user={user}/>*/}
-                </div>
+                <h1>Access Denied</h1>
             </div>
         )
     }
+    else{
+        if(data.editState === true){
+            return(
+                <div>
+                    <div>
+                        <EventEditForm props={data}></EventEditForm>
+                        <button onClick={toggleEditOff}>Cancel</button>
+                        {/*<CommentBox eventID={props.match.params.id} user={user}/>*/}
+                    </div>
+                </div>
+            )
+        }
+        else{
+            return(
+                <div className = "SingleEvent">
+                    <h1 className="title is-1">Single Event Comp for: {data.name}</h1>
+                    <button onClick={toggleEditOn}>EDIT</button>
+                    <button onClick={deleteEvent}>DELETE</button>
+                    <br/><h2>Event Info</h2>
+                    <p>
+                        <strong>Host</strong>: {data.host} <br/>
+                        <strong>Name</strong>: {data.name} <br/>
+                        <strong>Event Description</strong>: {data.description} <br/>
+                        <strong>Start Time</strong>: {convertTime(data.start_date_time)} <br/>
+                        <strong>End Time</strong>: {convertTime(data.end_date_time)}<br/>
+                    </p>
+                    {/*<CommentBox eventID={props.match.params.id} user={user}/>*/}
+                </div>
+            )
+        }
+    }
 
-    return(
-        <div className = "SingleEvent">
-            <h1 className="title is-1">Single Event Comp for: {data.name}</h1>
-            <button onClick={toggleEditOn}>EDIT</button>
-            <button onClick={deleteEvent}>DELETE</button>
-            <br/><h2>Event Info</h2>
-            <p>
-                <strong>Host</strong>: {data.host} <br/>
-                <strong>Name</strong>: {data.name} <br/>
-                <strong>Event Description</strong>: {data.description} <br/>
-                <strong>Start Time</strong>: {convertTime(data.start_date_time)} <br/>
-                <strong>End Time</strong>: {convertTime(data.end_date_time)}<br/>
-            </p>
-            {/*<CommentBox eventID={props.match.params.id} user={user}/>*/}
-        </div>
-    )
 }
 
 
